@@ -47,13 +47,13 @@
                     <a href="#"><i class="fa-solid fa-house-user"></i> <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href="hero-section.html">Hero Section</a>
+                    <a href="hero-section.php">Hero Section</a>
                 </li>
                 <li>
-                    <a href="#">About Us Section</a>
+                    <a href="about-us.php">About Us Section</a>
                 </li>
                 <li>
-                    <a href="#">Service Section</a>
+                    <a href="service-section.php">Service Section</a>
                 </li>
                 <li>
                     <a href="#">Portfolio Section</a>

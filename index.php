@@ -97,29 +97,39 @@
         <div class="section-title">
           <h2>About</h2>
           <h3>Learn More <span>About Us</span></h3>
-          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+          <?php 
+            //$conn = mysqli_connect("localhost", "root", "", "agency") or die("connection failed: ". mysqli_connect_error());
+            include "config.php";
+            $sql = "SELECT * FROM about_us";
+            $result = mysqli_query($conn, $sql) or die("connection failed: ". mysqli_connect_error());
+            
+            if(mysqli_num_rows($result) > 0){
+
+              while($row = mysqli_fetch_assoc($result)){
+          ?>
+          <p>
+            <?php echo $row['about_us_intro']; ?>
+          </p>
         </div>
 
         <div class="row content">
           <div class="col-lg-6">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+              <?php echo $row['list_intro']; ?>
             </p>
             <ul>
-              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-              <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+              <li><i class="ri-check-double-line"></i> <?php echo $row['list_desc']; ?></li>
             </ul>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum.
+              <?php echo $row['about_us_desc']; ?>
             </p>
             <a href="#" class="btn-learn-more">Learn More</a>
           </div>
+          <?php
+          }}
+          ?>
         </div>
 
       </div>
@@ -132,7 +142,19 @@
         <div class="section-title">
           <h2>Services</h2>
           <h3>We do offer awesome <span>Services</span></h3>
-          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+            <?php 
+              $sql1 = "SELECT * from service_section";
+              $result1 = mysqli_query($conn, $sql1) or die("query failed: ". mysqli_connect_error());
+              if(mysqli_num_rows($result1) > 0){
+                while($row1 = mysqli_fetch_assoc($result1)){
+
+               
+            ?>
+          <p><?php echo $row1['s_sec_intro'];?></p>
+        <?php
+         }
+          }
+        ?>
         </div>
 
         <div class="row">
