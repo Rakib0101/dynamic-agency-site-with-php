@@ -81,45 +81,63 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div class="hero-container">
-      <h3>Welcome to <strong>Tempo</strong></h3>
-      <h1>We're Creative Agency</h1>
-      <h2>We are team of talented designers making websites with Bootstrap</h2>
+      <?php 
+        include "admin/config.php";
+        $sql = "SELECT * FROM hero_section";
+
+        $result = mysqli_query($conn, $sql) or die("Query Failed.");
+        if(mysqli_num_rows($result) > 0){
+          while($row = mysqli_fetch_assoc($result)){
+      ?>
+      <h3>Welcome to <strong><?php echo "{$row['welcome_text']}"; ?></strong></h3>
+      <h1><?php echo "{$row['site_title']}"; ?></h1>
+      <h2><?php echo "{$row['site_desc']}"; ?></h2>
       <a href="#about" class="btn-get-started scrollto">Get Started</a>
     </div>
+    <?php }} ?>
   </section><!-- End Hero -->
 
   <main id="main">
 
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+<section id="about" class="about">
       <div class="container">
 
         <div class="section-title">
           <h2>About</h2>
           <h3>Learn More <span>About Us</span></h3>
-          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+          <?php 
+            //$conn = mysqli_connect("localhost", "root", "", "agency") or die("connection failed: ". mysqli_connect_error());
+           
+            $sql_about = "SELECT * FROM about_us";
+            $result_about = mysqli_query($conn, $sql_about) or die("connection failed: ". mysqli_connect_error());
+            
+            if(mysqli_num_rows($result_about) > 0){
+
+              while($row_about = mysqli_fetch_assoc($result_about)){
+          ?>
+          <p>
+            <?php echo $row_about['about_us_intro']; ?>
+          </p>
         </div>
 
         <div class="row content">
           <div class="col-lg-6">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+              <?php echo $row_about['list_intro']; ?>
             </p>
             <ul>
-              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-              <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+              <li><i class="ri-check-double-line"></i> <?php echo $row_about['list_desc']; ?></li>
             </ul>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum.
+              <?php echo $row_about['about_us_desc']; ?>
             </p>
             <a href="#" class="btn-learn-more">Learn More</a>
           </div>
+          <?php
+          }}
+          ?>
         </div>
 
       </div>
@@ -132,19 +150,36 @@
         <div class="section-title">
           <h2>Services</h2>
           <h3>We do offer awesome <span>Services</span></h3>
-          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+          <?php 
+              include "admin/config.php";
+              $sql = "SELECT * FROM service_section";
+
+              $result = mysqli_query($conn, $sql) or die("Query Failed.");
+              if(mysqli_num_rows($result) > 0){
+                while($row = mysqli_fetch_assoc($result)){
+          ?>
+          <p><?php echo $row['s_sec_intro']; ?></p>
+          <?php }} ?>
         </div>
 
         <div class="row">
+          <?php 
+            $sql_service = "SELECT * FROM service_list";
+
+            $result_service = mysqli_query($conn, $sql_service) or die("Query Failed.");
+            if(mysqli_num_rows($result_service) > 0){
+              while($row_service = mysqli_fetch_assoc($result_service)){
+            ?>
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+              <div class="icon"><img src="admin/upload/<?php echo $row_service['list_icon']; ?>" alt=""></div>
+              <h4 class="title"><a href=""><?php echo $row_service['list_title']; ?></a></h4>
+              <p class="description"><?php echo $row_service['list_desc']; ?></p>
             </div>
           </div>
+          <?php }} ?>
 
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+          <!-- <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-file"></i></div>
               <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
@@ -166,7 +201,7 @@
               <h4 class="title"><a href="">Nemo Enim</a></h4>
               <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
             </div>
-          </div>
+          </div> -->
 
         </div>
 
