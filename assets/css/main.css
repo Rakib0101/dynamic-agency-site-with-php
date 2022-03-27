@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
@@ -31,7 +31,7 @@ a {
 
 .top-bar input {
   color: #000;
-  background-color: #ECECEC;
+  background-color: #ececec;
   padding: 4px 10px;
   outline: none;
   border: none;
@@ -45,4 +45,8 @@ a {
 .sidebar ul li {
   padding: 5px 0;
   border-bottom: 1px solid #ddd;
+}
+.form-group label {
+  font-weight: bold;
+  font-size: 24px;
 }
