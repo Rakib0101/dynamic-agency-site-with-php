@@ -11,14 +11,17 @@
         $file_ext = end(explode('.',$file_name));
 
         $extensions = array("jpeg", "jpg", "png", "svg");
-        // if(in_array($file_ext, $$extensions) === false){
-        //     $errors[] = "This extension file not allowed, Please choose a JPG or PNG file.";
-        // }
+        $new_name = time(). "-".basename($file_name);
+        $target = "upload/".$new_name;
+
+        if(in_array($file_ext, $$extensions) === false){
+            $errors[] = "This extension file not allowed, Please choose a JPG or PNG file.";
+        }
          if($file_size > 2097152){
             $errors[] = "File size must be 2mb or lower.";
             }
         if(empty($errors) == true){
-            move_uploaded_file($file_tmp, "upload/".$file_name);
+            move_uploaded_file($file_tmp, $target);
         }else{
             print_r($errors);
             die();
@@ -33,8 +36,8 @@
     $purl = mysqli_real_escape_string($conn, $_POST['purl']);
 
         $sql = "INSERT INTO projects(project_name, project_desc, project_cat, project_img, project_client, project_date, project_url)
-                 VALUES('{$pname}', '{$desc}', '{$pcat}','{$file_name}','{$pclient}','{$pdate}', '{$purl}');";
-        $sql .="UPDATE INTO portfolio_category SET projects = projects + 1 WHERE id = {$pcat}";
+                 VALUES('{$pname}', '{$desc}', '{$pcat}','{$new_name}','{$pclient}','{$pdate}', '{$purl}');";
+        $sql .="UPDATE portfolio_category SET projects = projects + 1 WHERE id = {$pcat}";
         
         
         if(mysqli_multi_query($conn, $sql)){

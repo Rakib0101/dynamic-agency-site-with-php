@@ -36,7 +36,7 @@
                     $description = mysqli_real_escape_string($conn, $_POST['sdesc']);
                     $service_id = $_GET['id'];
 
-                    $sql1 = "UPDATE service_list SET list_title='{$title}', list_desc='{$description}', list_icon='{$new_name}' WHERE id ='{$service_id}'";
+                    $sql1 = "UPDATE service_list SET list_title ='{$title}', list_desc='{$description}', list_icon='{$new_name}' WHERE id ='{$service_id}'";
 
                     if(mysqli_multi_query($conn, $sql1)){
                         header("location: {$hostname}/admin/service-section.php");
