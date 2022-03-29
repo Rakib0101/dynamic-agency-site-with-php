@@ -56,7 +56,7 @@
                     <a href="service-section.php">Service Section</a>
                 </li>
                 <li>
-                    <a href="#">Portfolio Section</a>
+                    <a href="portfolio-section.php">Portfolio Section</a>
                 </li>
                 <li>
                     <a href="#">Package Section</a>
