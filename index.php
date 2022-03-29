@@ -334,15 +334,15 @@
 
         <div class="row portfolio-container">
             <?php
-                $sql_projects = "SELECT * FROM projects";
+                $sql_projects = "SELECT portfolio_category.category_name, projects.project_name, projects.project_desc, projects.project_date, projects.project_img, projects.project_client, projects.project_url FROM portfolio_category, projects WHERE portfolio_category.id = projects.project_cat";
                 $result_projects = mysqli_query($conn, $sql_projects) or die("Query Failed.");
 
                 if(mysqli_num_rows($result_projects) > 0){
-                      while($row = mysqli_fetch_assoc($result_projects)){
-                        echo '<div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                            <img src="./admin/upload/<?php echo '{$row['project_img']}'; ?>" class="img-fluid" alt="">
+                      while($row2 = mysqli_fetch_assoc($result_projects)){
+                        echo '<div class="col-lg-4 col-md-6 portfolio-item filter-'.$row2['category_name'].'">
+                            <img src="./admin/upload/'.$row2["project_img"].'" class="img-fluid" alt="">
                             <div class="portfolio-info">
-                              <h4>App 1</h4>
+                              <h4>'.$row2["project_name"].'</h4>
                               <p>App</p>
                               <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
                               <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
