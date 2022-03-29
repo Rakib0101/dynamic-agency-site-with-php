@@ -317,26 +317,42 @@
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">App</li>
-              <li data-filter=".filter-card">Card</li>
-              <li data-filter=".filter-web">Web</li>
+              <?php
+                $sql_cat = "SELECT * FROM portfolio_category";
+                $result_cat = mysqli_query($conn, $sql_cat) or die("Query Failed.");
+
+                if(mysqli_num_rows($result_cat) > 0){
+                      while($row = mysqli_fetch_assoc($result_cat)){
+                          echo "<li data-filter='.filter-{$row['category_name']}'>".$row["category_name"]."</li>";
+                                  }
+                      }
+              ?>
+              
             </ul>
           </div>
         </div>
 
         <div class="row portfolio-container">
+            <?php
+                $sql_projects = "SELECT * FROM projects";
+                $result_projects = mysqli_query($conn, $sql_projects) or die("Query Failed.");
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
-              <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
+                if(mysqli_num_rows($result_projects) > 0){
+                      while($row = mysqli_fetch_assoc($result_projects)){
+                        echo '<div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                            <img src="./admin/upload/<?php echo '{$row['project_img']}'; ?>" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+                              <h4>App 1</h4>
+                              <p>App</p>
+                              <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
+                              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                            </div>
+                          </div>';
+                      }}
+              ?>
+                    
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>Web 3</h4>
@@ -414,7 +430,7 @@
               <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
               <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
             </div>
-          </div>
+          </div> -->
 
         </div>
 

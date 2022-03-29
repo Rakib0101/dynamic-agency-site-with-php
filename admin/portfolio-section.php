@@ -44,7 +44,9 @@
                                 <td><?php echo $row_project['project_date']; ?></td>
                                 <td><?php echo $row_project['project_url']; ?></td>
                                 <td class='edit'><a href='update-project.php?id=<?php echo $row_project['id']; ?>'><i class='fa fa-edit'></i></a></td>
-                                <td class='delete'><a href='delete-project.php?id=<?php echo $row_project['id']; ?>'><i class='fa fa-trash'></i></a></td>
+                                <td class='delete'>
+                                    <a href='delete-project.php?id=<?php echo $row_project['id'] ."&cat=".$row_project['project_cat']; ?>'><i class='fa fa-trash'></i></a>
+                                </td>
                             </tr>
                             <?php }} ?>
                         </tbody>

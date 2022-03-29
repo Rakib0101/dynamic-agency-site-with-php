@@ -20,7 +20,7 @@
       $errors[] = "File size must be 2mb or lower.";
     }
     $new_name = time(). "-".basename($file_name);
-    $target = "./admin/upload/".$new_name;
+    $target = "upload/".$new_name;
 
     if(empty($errors) == true){
       move_uploaded_file($file_tmp,$target);
