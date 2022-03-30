@@ -8,14 +8,15 @@
 
     <!-- Vendor CSS Files -->
     <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <!-- fontawesome cdn -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" integrity="sha384-/frq1SRXYH/bSyou/HUp/hib7RVN1TawQYja658FEOodR/FQBKVqT9Ol+Oz3Olq5" crossorigin="anonymous">
 
     <link href="../assets/css/main.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <div class="top-bar">
+    <div class="top-bar bg-info">
         <div class="row border-1 border-bottom container-fluid">
             <div class="col-md-2 border-1 border-end py-2">
                 <a class="d-block text-left text-decoration-none" href=""><h4>Site Logo</h4></a>
@@ -59,16 +60,16 @@
                     <a href="portfolio-section.php">Portfolio Section</a>
                 </li>
                 <li>
-                    <a href="#">Package Section</a>
+                    <a href="package-section.php">Package Section</a>
                 </li>
                 <li>
-                    <a href="#">Faq Section</a>
+                    <a href="faq-section.php">Faq Section</a>
                 </li>
                 <li>
-                    <a href="#">Team Section</a>
+                    <a href="team-section.php">Team Section</a>
                 </li>
                 <li>
-                    <a href="#">Contact Section</a>
+                    <a href="contact-section.php">Contact Section</a>
                 </li>
             </ul>
         </div>

@@ -21,6 +21,10 @@ a {
   display: inline-block;
 }
 
+table {
+  overflow: auto;
+}
+
 .top-bar {
   position: -webkit-sticky;
   position: sticky;
@@ -45,4 +49,69 @@ a {
 .sidebar ul li {
   padding: 5px 0;
   border-bottom: 1px solid #ddd;
+}
+
+.faq {
+  padding: 60px 0;
+}
+
+.faq .faq-list {
+  padding: 0;
+  list-style: none;
+}
+
+.faq .faq-list li {
+  border-bottom: 1px solid #f1eeef;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.faq .question {
+  display: block;
+  position: relative;
+  font-family: #e43c5c;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
+  padding-left: 25px;
+  cursor: pointer;
+  color: #d01d3f;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.faq .icon-close, .faq .icon-show {
+  font-size: 16px;
+  position: absolute;
+  left: 0;
+  top: -2px;
+}
+
+.faq p {
+  margin-bottom: 0;
+  padding: 10px 0 0 25px;
+}
+
+.faq .icon-show {
+  display: none;
+}
+
+.faq .collapsed {
+  color: black;
+}
+
+.faq .collapsed .icon-show {
+  display: inline-block;
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+}
+
+.faq .collapsed .icon-close {
+  display: none;
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+}
+
+.faq .collapsed:hover {
+  color: #e43c5c;
 }

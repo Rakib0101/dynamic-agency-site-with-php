@@ -43,11 +43,9 @@
                 $date = mysqli_real_escape_string($conn, $_POST['project_date']);
 
                 $sql = "UPDATE projects SET project_name='{$name}', project_desc={$description}', project_cat={$category}, project_date='{$date}', project_url='{$url}', project_client='{$client}, project_img='{$new_name}' WHERE id={$project_id}";
-                $sql .= "UPDATE category SET post = post + 1 WHERE category_id = {$category}";
 
-                if(mysqli_multi_query($conn, $sql)){
-                    
-                    header("location: {$hostname}/admin/add-project.php");
+                if(mysqli_multi_query($conn, $sql)){    
+                    header("location: {$hostname}/admin/portfolio-section.php");
                 }else{
                     echo "<div class='alert alert-danger'>Query Failed.</div>";
                 }
@@ -60,16 +58,16 @@
 
                     $result = mysqli_query($conn, $sql) or die("Query Failed.");
                     if(mysqli_num_rows($result) > 0){
-                        while($row = mysqli_fetch_assoc($result)){
+                        while($row1 = mysqli_fetch_assoc($result)){
                 ?>
                   <form class="w-75"  action="save-project.php" method="POST" enctype="multipart/form-data">
                       <div class="form-group mt-2">
                           <label for="post_title">Title</label>
-                          <input type="text" name="project_name" class="form-control" autocomplete="off" value="<?php echo $row['project_name']; ?>" required>
+                          <input type="text" name="project_name" class="form-control" autocomplete="off" value="<?php echo $row1['project_name']; ?>" required>
                       </div>
                       <div class="form-group mt-2">
                           <label for="exampleInputPassword1"> Description</label>
-                          <textarea name="project_desc" class="form-control" rows="5"  required></textarea>
+                          <textarea name="project_desc" class="form-control" rows="5"  required><?php echo $row1['project_desc']; ?></textarea>
                       </div>
                       <div class="form-group mt-2">
                           <label for="category">Category</label>
@@ -90,15 +88,15 @@
                       </div>
                       <div class="form-group mt-2">
                           <label for="fileToUpload" >Project Client</label>
-                          <input type="text" name="project_client" class="form-control" required>
+                          <input type="text" name="project_client" value="<?php echo $row1['project_client']; ?>" class="form-control" required>
                       </div>
                       <div class="form-group mt-2">
                           <label for="fileToUpload">Project Link</label>
-                          <input type="text" name="project_url" required class="form-control">
+                          <input type="text" name="project_url" value="<?php echo $row1['project_url']; ?>" required class="form-control">
                       </div>
                       <div class="form-group mt-2" >
                           <label for="fileToUpload">Project Date</label>
-                          <input type="date" name="project_date" required class="form-control">
+                          <input type="date" name="project_date" required class="form-control" value="<?php echo $row1['project_date']; ?>">
                       </div>
                       <div class="form-group mt-2">
                           <label for="fileToUpload" >Project image</label>

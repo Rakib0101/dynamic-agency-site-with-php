@@ -334,18 +334,18 @@
 
         <div class="row portfolio-container">
             <?php
-                $sql_projects = "SELECT portfolio_category.category_name, projects.project_name, projects.project_desc, projects.project_date, projects.project_img, projects.project_client, projects.project_url FROM portfolio_category, projects WHERE portfolio_category.id = projects.project_cat";
+                $sql_projects = "SELECT portfolio_category.category_name, projects.id, projects.project_name, projects.project_desc, projects.project_date, projects.project_img, projects.project_client, projects.project_url FROM portfolio_category, projects WHERE portfolio_category.id = projects.project_cat";
                 $result_projects = mysqli_query($conn, $sql_projects) or die("Query Failed.");
 
-                if(mysqli_num_rows($result_projects) > 0){
+                if(mysqli_num_rows($result_projects) > 0  ){
                       while($row2 = mysqli_fetch_assoc($result_projects)){
                         echo '<div class="col-lg-4 col-md-6 portfolio-item filter-'.$row2['category_name'].'">
                             <img src="./admin/upload/'.$row2["project_img"].'" class="img-fluid" alt="">
                             <div class="portfolio-info">
                               <h4>'.$row2["project_name"].'</h4>
-                              <p>App</p>
+                              <p>'.$row2["category_name"].'</p>
                               <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
-                              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                              <a href="portfolio-details.php?id='.$row2["id"].'" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                             </div>
                           </div>';
                       }}
@@ -517,59 +517,27 @@
 
         <ul class="faq-list">
 
+                    <?php 
+                                $sql_faq = "SELECT * FROM faq";
+                                $result_faq = mysqli_query($conn, $sql_faq) or die("Query Failed.");
+                                if(mysqli_num_rows($result_faq) > 0){
+                                    while($row = mysqli_fetch_assoc($result_faq)){
+                                ?>
           <li>
-            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">Non consectetur a erat nam at lectus urna duis? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1"><?php echo $row['faq_question']; ?><i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq1" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                <?php echo $row['faq_answer']; ?>
               </p>
             </div>
-          </li>
+            <div>
+                <a href=""><i class="fa fa-edit"></i></a>
+                <a href=""><i class="fa fa-trash"></i></a>
+            </div>
+            </li>
+            <?php }} ?>
 
-          <li>
-            <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
-            <div id="faq2" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-              </p>
-            </div>
-          </li>
 
-          <li>
-            <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
-            <div id="faq3" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
-            <div id="faq4" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <div data-bs-toggle="collapse" href="#faq5" class="collapsed question">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
-            <div id="faq5" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <div data-bs-toggle="collapse" href="#faq6" class="collapsed question">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
-            <div id="faq6" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
-              </p>
-            </div>
-          </li>
 
         </ul>
 

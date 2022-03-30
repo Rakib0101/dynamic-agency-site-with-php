@@ -47,7 +47,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto " href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto " href="index.php">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
           <li><a class="nav-link scrollto active" href="#portfolio">Portfolio</a></li>
@@ -85,7 +85,7 @@
       <div class="container">
 
         <ol>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="index.php">Home</a></li>
           <li>Portfolio Details</li>
         </ol>
         <h2>Portfolio Details</h2>
@@ -98,21 +98,21 @@
       <div class="container">
 
         <div class="row gy-4">
+          <?php
+            include "admin/config.php";
 
-          <div class="col-lg-8">
+            $id = $_GET['id'];
+
+            $sql = "SELECT portfolio_category.category_name, projects.id, projects.project_name, projects.project_desc, projects.project_date, projects.project_img, projects.project_client, projects.project_url FROM portfolio_category, projects WHERE portfolio_category.id = projects.project_cat AND projects.id={$id}";
+            $result = mysqli_query($conn, $sql) or die("Query Failed : Select");
+            $row = mysqli_fetch_assoc($result);
+            
+            echo'<div class="col-lg-8">
             <div class="portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
 
                 <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-details-1.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-details-2.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-details-3.jpg" alt="">
+                  <img src="./admin/upload/'.$row['project_img'].'" alt="">
                 </div>
 
               </div>
@@ -124,20 +124,20 @@
             <div class="portfolio-info">
               <h3>Project information</h3>
               <ul>
-                <li><strong>Category</strong>: Web design</li>
-                <li><strong>Client</strong>: ASU Company</li>
-                <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+                <li><strong>Category</strong>: '.$row['category_name'].'</li>
+                <li><strong>Client</strong>: '.$row['project_client'].'</li>
+                <li><strong>Project date</strong>: '.$row['project_date'].'</li>
+                <li><strong>Project URL</strong>: <a href="#">'.$row['project_url'].'</a></li>
               </ul>
             </div>
             <div class="portfolio-description">
-              <h2>This is an example of portfolio detail</h2>
+              <h2>'.$row['project_name'].'</h2>
               <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+                '.$row['project_desc'].'
               </p>
             </div>
-          </div>
-
+          </div>';
+          ?>
         </div>
 
       </div>
