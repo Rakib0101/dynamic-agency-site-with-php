@@ -448,25 +448,32 @@
         </div>
 
         <div class="row">
-
+          <?php 
+                                $sql_package = "SELECT * FROM package";
+                                $result_package = mysqli_query($conn, $sql_package) or die("Query Failed.");
+                                if(mysqli_num_rows($result_package) > 0){
+                                    while($row_package = mysqli_fetch_assoc($result_package)){
+                                ?>
           <div class="col-lg-4 col-md-6">
             <div class="box">
               <h3>Free</h3>
               <h4><sup>$</sup>0<span> / month</span></h4>
               <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li class="na">Pharetra massa</li>
-                <li class="na">Massa ultricies mi</li>
+                <?php 
+                    $string = $row_package['feature'];
+                    $str_arr = explode (",", $string); 
+                    foreach($str_arr as $str){
+                        echo "<li>{$str}</li>";
+                      }
+                ?>
               </ul>
               <div class="btn-wrap">
                 <a href="#" class="btn-buy">Buy Now</a>
               </div>
             </div>
           </div>
-
-          <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+          <?php }} ?>
+          <!-- <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
             <div class="box recommended">
               <span class="recommended-badge">Recommended</span>
               <h3>Business</h3>
@@ -499,7 +506,7 @@
                 <a href="#" class="btn-buy">Buy Now</a>
               </div>
             </div>
-          </div>
+          </div> -->
 
         </div>
 
@@ -555,26 +562,32 @@
         </div>
 
         <div class="row">
+          <?php 
+                    $sql = "SELECT * FROM team";
 
+                    $result = mysqli_query($conn, $sql) or die("Query Failed.");
+                    if(mysqli_num_rows($result) > 0){
+                        while($row1 = mysqli_fetch_assoc($result)){
+                ?>
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
-                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                <img src="./admin/upload/<?php echo $row1['member_img']; ?>" class="img-fluid" alt="">
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  <a href="<?php echo $row1['twitter']; ?>" target="_blank"><i class="bi bi-twitter"></i></a>
+                  <a href="<?php echo $row1['facebook']; ?>" target="_blank"><i class="bi bi-facebook"></i></a>
+                  <a href="<?php echo $row1['instagram']; ?>" target="_blank"><i class="bi bi-instagram"></i></a>
+                  <a href="<?php echo $row1['linkedIn']; ?>" target="_blank"><i class="bi bi-linkedin"></i></a>
                 </div>
               </div>
               <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
+                <h4><?php echo $row1['member_name']; ?></h4>
+                <span><?php echo $row1['member_position']; ?></span>
               </div>
             </div>
           </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+          <?php }} ?>
+          <!-- <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
                 <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
@@ -626,7 +639,7 @@
                 <span>Accountant</span>
               </div>
             </div>
-          </div>
+          </div> -->
 
         </div>
 
