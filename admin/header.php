@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" integrity="sha384-/frq1SRXYH/bSyou/HUp/hib7RVN1TawQYja658FEOodR/FQBKVqT9Ol+Oz3Olq5" crossorigin="anonymous">
 
     <link href="../assets/css/main.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
 </head>
 <body>
     <div class="top-bar">
@@ -59,16 +60,16 @@
                     <a href="portfolio-section.php">Portfolio Section</a>
                 </li>
                 <li>
-                    <a href="#">Package Section</a>
+                    <a href="package.php">Package Section</a>
                 </li>
                 <li>
-                    <a href="#">Faq Section</a>
+                    <a href="faq.php">Faq Section</a>
                 </li>
                 <li>
-                    <a href="#">Team Section</a>
+                    <a href="team.php">Team Section</a>
                 </li>
                 <li>
-                    <a href="#">Contact Section</a>
+                    <a href="contact.php">Contact Section</a>
                 </li>
             </ul>
         </div>
