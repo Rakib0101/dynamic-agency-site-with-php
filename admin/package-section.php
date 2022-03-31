@@ -42,9 +42,9 @@
                                             echo "<li>{$str}</li>";
                                         }
                                     ?></td>
-                                <td class='edit'><a href='update-project.php?id=<?php echo $row_project['id']; ?>'><i class='fa fa-edit'></i></a></td>
+                                <td class='edit'><a href='update-package.php?id=<?php echo $row_package['id']; ?>'><i class='fa fa-edit'></i></a></td>
                                 <td class='delete'>
-                                    <a href='delete-project.php?id=<?php echo $row_project['id'] ."&cat=".$row_project['project_cat']; ?>'><i class='fa fa-trash'></i></a>
+                                    <a href='delete-package.php?id=<?php echo $row_package["id"];?>'<i class='fa fa-trash'></i></a>
                                 </td>
                             </tr>
                             <?php }} ?>

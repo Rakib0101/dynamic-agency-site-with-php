@@ -1,56 +1,55 @@
 <?php 
     include 'header.php';
     include 'config.php';
-?>
-        <div class="col-md-10 mainbar">
-            <?php
-            if(isset($_FILES['fileToUpload'])){
-                $errors = array();
+    $id = $_GET['id'];
+               if(isset($_FILES['project_img']) AND isset($_POST['submit'])){
+                    $errors = array();
 
-                $file_name = $_FILES['fileToUpload']['name'];
-                $file_size = $_FILES['fileToUpload']['size'];
-                $file_tmp = $_FILES['fileToUpload']['tmp_name'];
-                $file_type = $_FILES['fileToUpload']['type'];
-                $file_ext = end(explode('.',$file_name));
+                    $file_name = $_FILES['project_img']['name'];
+                    $file_size = $_FILES['project_img']['size'];
+                    $file_tmp = $_FILES['project_img']['tmp_name'];
+                    $file_type = $_FILES['project_img']['type'];
+                    $file_ext = end(explode('.', $file_name));
 
-                $extensions = array("jpeg","jpg","png");
+                    $extensions = array("jpeg", "jpg", "png", "svg");
 
-                if(in_array($file_ext,$extensions) === false)
-                {
-                $errors[] = "This extension file not allowed, Please choose a JPG or PNG file.";
-                }
+                    if(in_array($file_ext, $extensions) === false){
+                        $errors[] = "This extension file not allowed, please choose a jpg, png or svg file.";
+                    }
 
                     if($file_size > 2097152){
-                    $errors[] = "File size must be 2mb or lower.";
+                        $errors[] = "File size must be 2mb or lower.";
                     }
+
                     $new_name = time(). "-".basename($file_name);
-                    $target = "./admin/upload/".$new_name;
+                    $target = "upload/".$new_name;
 
                     if(empty($errors) == true){
-                    move_uploaded_file($file_tmp,$target);
+                        move_uploaded_file($file_tmp,$target);
                     }else{
-                    print_r($errors);
-                    die();
+                        print_r($errors);
+                        die();
+                    }
+                $pname = mysqli_real_escape_string($conn, $_POST['project_name']);
+                $desc = mysqli_real_escape_string($conn, $_POST['project_desc']);
+                $pcat = mysqli_real_escape_string($conn, $_POST['project_cat']);
+                $pclient = mysqli_real_escape_string($conn, $_POST['project_client']);
+                $pdate = date("d M, Y");
+                $purl = mysqli_real_escape_string($conn, $_POST['project_url']);
+
+                $sql1 = "UPDATE projects SET project_name ='{$pname}', project_desc='{$desc}', project_cat={$pcat}, project_img ='{$new_name}' , project_client='{$pclient}', project_date='{$pdate}', project_url='{$purl}' WHERE id = {$id};";
+                 
+                    
+                    
+                    if(mysqli_multi_query($conn, $sql1)){
+                        header("location:{$hostname}/admin/portfolio-section.php");
+                    }else{
+                        echo "<div class='alert alert-danger'>Query Failed.</div>";
                     }
                 }
-                $project_id = $_GET['id'];
-                if(isset($_POST['submit'])){
-                $name= mysqli_real_escape_string($conn, $_POST['project_name']);
-                $description = mysqli_real_escape_string($conn, $_POST['project_desc']);
-                $category = mysqli_real_escape_string($conn, $_POST['project_cat']);
-                $client = mysqli_real_escape_string($conn, $_POST['project_client']);
-                $url = mysqli_real_escape_string($conn, $_POST['project_url']);
-                $date = mysqli_real_escape_string($conn, $_POST['project_date']);
-
-                $sql = "UPDATE projects SET project_name='{$name}', project_desc={$description}', project_cat={$category}, project_date='{$date}', project_url='{$url}', project_client='{$client}, project_img='{$new_name}' WHERE id={$project_id}";
-
-                if(mysqli_multi_query($conn, $sql)){    
-                    header("location: {$hostname}/admin/portfolio-section.php");
-                }else{
-                    echo "<div class='alert alert-danger'>Query Failed.</div>";
-                }
-            }
-        ?>
+               
+?>
+        <div class="col-md-10 mainbar">
             <h2>Update Your project:</h2>
                 <?php 
                     $project_id = $_GET['id'];
@@ -60,7 +59,7 @@
                     if(mysqli_num_rows($result) > 0){
                         while($row1 = mysqli_fetch_assoc($result)){
                 ?>
-                  <form class="w-75"  action="save-project.php" method="POST" enctype="multipart/form-data">
+                  <form class="w-75"  action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
                       <div class="form-group mt-2">
                           <label for="post_title">Title</label>
                           <input type="text" name="project_name" class="form-control" autocomplete="off" value="<?php echo $row1['project_name']; ?>" required>
@@ -99,8 +98,8 @@
                           <input type="date" name="project_date" required class="form-control" value="<?php echo $row1['project_date']; ?>">
                       </div>
                       <div class="form-group mt-2">
-                          <label for="fileToUpload" >Project image</label>
-                          <input type="file" name="fileToUpload" required class="form-control">
+                          <label for="project_img" >Project image</label>
+                          <input type="file" name="project_img" required class="form-control">
                       </div>
                       <input type="submit" name="submit" class="btn btn-primary mb-3" value="Save" required />
                   </form>
